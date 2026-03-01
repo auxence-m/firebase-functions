@@ -4,7 +4,7 @@ import React from "react";
 interface ContactFormProps {
     name: string;
     email: string;
-    phoneNumber: string;
+    phone: string;
     message: string;
 }
 
@@ -14,11 +14,11 @@ interface ContactFormProps {
  * @param {Object} props - The contact form properties.
  * @param {string} props.name - The name of the person submitting the form.
  * @param {string} props.email - The email address of the person.
- * @param {string} props.phoneNumber - The phone number of the person.
+ * @param {string} props.phone - The phone number of the person.
  * @param {string} props.message - The message submitted in the contact form.
  * @return {void} Nothing is returned.
  */
-export default function Email({ name, email, phoneNumber, message }: ContactFormProps): React.JSX.Element {
+export default function Email({ name, email, phone, message }: ContactFormProps): React.JSX.Element {
     return (
         <Html>
             <Head />
@@ -44,7 +44,7 @@ export default function Email({ name, email, phoneNumber, message }: ContactForm
                                         <b>Email: </b> {email}
                                     </Text>
                                     <Text className="text-gray-900 text-base mb-4">
-                                        <b>Numero de téléphone: </b> {phoneNumber}
+                                        <b>Numero de téléphone: </b> {phone}
                                     </Text>
                                     <Text className="text-gray-900 text-base mb-4 whitespace-pre-line">
                                         <b>Message: </b> {message}

@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable-next-line new-cap*/
 
-import { onRequest } from "firebase-functions/v2/https";
+import {onRequest} from "firebase-functions/https";
 import { defineString } from "firebase-functions/params";
 import {logger } from "firebase-functions/logger";
 import { render } from "@react-email/components";
@@ -25,7 +25,7 @@ const transporter = nodemailer.createTransport({
 });
 
 exports.sendEmail = onRequest(
-    {cors: true},
+    {cors: true}, // Change to website URL
     async (req, res) : Promise<void> => {
         try {
             if (req.method !== "POST") {
@@ -33,16 +33,17 @@ exports.sendEmail = onRequest(
                 return;
             }
 
-            const { name, email, phoneNumber, message } = req.body ?? {};
+            const { name, email, phone, message } = req.body ?? {};
 
-            if (!name || !email || !phoneNumber || !message) {
+            if (!name || !email || !phone || !message) {
+                logger.error("Champ obligatoire manquant: name, email, phoneNumber, or message");
                 res.status(400).json({
                     message: "Champ obligatoire manquant: name, email, phoneNumber, or message",
                 });
                 return;
             }
 
-            const emailHtml = await render(Email({name: name, email: email, phoneNumber: phoneNumber, message: message}));
+            const emailHtml = await render(Email({name: name, email: email, phone: phone, message: message}));
 
             await transporter.sendMail({
                 from: senderEmail.value(),
