@@ -25,7 +25,7 @@ const transporter = nodemailer.createTransport({
 });
 
 exports.sendEmail = onRequest(
-    {cors: true}, // Change to website URL
+    {cors: ["https://arboml-website.vercel.app/", "https://www.arboml.ca/"]},
     async (req, res) : Promise<void> => {
         try {
             if (req.method !== "POST") {
